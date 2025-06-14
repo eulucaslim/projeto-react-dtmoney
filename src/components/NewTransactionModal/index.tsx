@@ -5,6 +5,7 @@ import closeImg from '../../assets/close.svg';
 
 import { Container, RadioBox, TransactionTypeContainer} from './styles';
 import { FormEvent, useState } from 'react';
+import { api } from '../../services/api';
 
 interface NewTransactionModalProps {
     isOpen: boolean;
@@ -18,14 +19,13 @@ export function NewTransactionModal({isOpen, onRequestClose} : NewTransactionMod
 
     function handleCreateNewTransaction(event: FormEvent){
         event.preventDefault();
-
-        console.log({
+        const data = {
             title, 
             value,
             category,
             type
-        })
-        
+        };
+        api.post('/transactions', data)
     }
 
     return (
@@ -74,7 +74,7 @@ export function NewTransactionModal({isOpen, onRequestClose} : NewTransactionMod
                         type='button' 
                         onClick={() => { setType('withdraw') }}
                         isActive={type === 'withdraw'}
-                        activeColor="green"
+                        activeColor="red"
                     >
                         <img src={outcomeImg} alt="Saída" />
                         <span>Saída</span>
