@@ -10,8 +10,9 @@ interface Transaction {
     createdAt: string;
 
 }
+
 interface TransactionsProviderProps {
-    children: ReactNode
+    children: ReactNode;
 }
 
 
@@ -26,8 +27,8 @@ export function TransactionsProvider({ children }: TransactionsProviderProps ) {
     }, []);
     
     return (
-        <TransactionsContext value={transactions}>
+        <TransactionsContext.Provider value={transactions}>
             { children }
-        </TransactionsContext>
+        </TransactionsContext.Provider>
     )
 }
